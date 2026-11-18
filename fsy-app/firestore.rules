@@ -1,0 +1,13 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function acc(){ return get(/databases/$(database)/documents/config/acceso).data; }
+    function mail(){ return request.auth.token.email.lower(); }
+    function lector(){ return request.auth != null && request.auth.token.email_verified && (mail() in acc().editores || mail() in acc().lectores); }
+    function editor(){ return request.auth != null && request.auth.token.email_verified && mail() in acc().editores; }
+    match /config/acceso { allow read: if lector(); allow write: if false; }
+    match /fsy/{d} { allow read: if lector(); allow write: if editor(); }
+    match /tokens/{t} { allow create, update: if lector() && request.resource.data.uid == request.auth.uid; }
+    match /enviados/{d} { allow read, write: if false; }
+  }
+}
