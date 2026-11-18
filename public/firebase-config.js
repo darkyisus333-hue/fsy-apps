@@ -1,6 +1,6 @@
 var FIREBASE_CONFIG = {
   apiKey: "AIzaSyBEkup9dDNYYLSbNBvJDcN84E3mx_8Tpw",
-  authDomain: "fsy-occidente-logistica.web.com",
+  authDomain: "fsy-occidente-logistica.web.app",
   projectId: "fsy-occidente-logistica",
   storageBucket: "fsy-occidente-logistica.firebasestorage.app",
   messagingSenderId: "99958007936",
